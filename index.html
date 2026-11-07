@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Alunos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">📚 Gestão de Alunos</div>
+      <ul class="nav-links" id="nav-links"></ul>
+      <div class="user-info" id="user-info"></div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+    </nav>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+
+    <!-- SEÇÃO DE AUTENTICAÇÃO -->
+    <section id="auth-section" class="card hidden">
+      <div class="auth-tabs">
+        <button id="show-login" class="tab active">Login</button>
+        <button id="show-register" class="tab">Registrar</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <h2>Entrar</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-senha" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+        <p class="error-msg" id="login-error"></p>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-top:0.5rem;">
+          Conta demo: <strong>admin@admin.com</strong> / <strong>admin123</strong>
+        </p>
+      </form>
+
+      <form id="register-form" class="auth-form hidden">
+        <h2>Criar Conta</h2>
+        <input type="text" id="reg-nome" placeholder="Nome completo" required>
+        <input type="email" id="reg-email" placeholder="Email" required>
+        <input type="password" id="reg-senha" placeholder="Senha" required>
+        <button type="submit">Registrar</button>
+        <p class="error-msg" id="register-error"></p>
+      </form>
+    </section>
+
+    <!-- SEÇÃO ALUNOS -->
+    <section id="students-section" class="hidden">
+      <h2>Alunos</h2>
+      <div class="form-card">
+        <h3 id="student-form-title">Cadastrar Aluno</h3>
+        <form id="student-form">
+          <input type="hidden" id="student-id">
+          <input type="text" id="student-nome" placeholder="Nome" required>
+          <input type="number" id="student-idade" placeholder="Idade" min="1" required>
+          <input type="email" id="student-email" placeholder="Email" required>
+          <select id="student-turma">
+            <option value="">-- Selecione a Turma --</option>
+          </select>
+          <button type="submit" id="student-submit-btn">Cadastrar</button>
+          <button type="button" id="student-cancel-btn" class="btn-secondary hidden">Cancelar</button>
+        </form>
+      </div>
+      <div class="table-container">
+        <table id="students-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th>Email</th>
+              <th>Turma</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO TURMAS -->
+    <section id="classes-section" class="hidden">
+      <h2>Turmas</h2>
+      <div class="form-card">
+        <h3 id="class-form-title">Cadastrar Turma</h3>
+        <form id="class-form">
+          <input type="hidden" id="class-id">
+          <input type="text" id="class-nome" placeholder="Nome da turma" required>
+          <input type="text" id="class-descricao" placeholder="Descrição (opcional)">
+          <button type="submit" id="class-submit-btn">Cadastrar</button>
+          <button type="button" id="class-cancel-btn" class="btn-secondary hidden">Cancelar</button>
+        </form>
+      </div>
+      <div class="table-container">
+        <table id="classes-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO NOTAS -->
+    <section id="grades-section" class="hidden">
+      <h2>Notas</h2>
+      <div class="filter-bar">
+        <label for="grade-turma-select">Turma:</label>
+        <select id="grade-turma-select">
+          <option value="">-- Selecione --</option>
+        </select>
+      </div>
+      <div class="table-container" id="grades-container">
+        <table id="grades-table">
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Email</th>
+              <th>Nota (0-10)</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO FREQUÊNCIA -->
+    <section id="attendance-section" class="hidden">
+      <h2>Controle de Frequência</h2>
+      <div class="filter-bar">
+        <label for="att-turma-select">Turma:</label>
+        <select id="att-turma-select">
+          <option value="">-- Selecione --</option>
+        </select>
+        <label for="att-data">Data:</label>
+        <input type="date" id="att-data">
+        <button id="att-load-btn" class="btn-primary">Carregar</button>
+      </div>
+      <div class="table-container" id="attendance-container">
+        <table id="attendance-table">
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Email</th>
+              <th>Presente</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <button id="att-save-btn" class="btn-success" style="margin-top:1rem;">Salvar Frequência</button>
+      </div>
+    </section>
+
+    <!-- FEEDBACK TOAST -->
+    <div id="feedback-message" class="feedback hidden"></div>
+
+  </main>
+</body>
+</html>
